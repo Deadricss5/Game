@@ -1,7 +1,9 @@
 let $start  = document.querySelector('#start')
 let $game   = document.querySelector('#game')
+let score  = 0
 
 $start.addEventListener('click', startGame)
+$game.addEventListener('click', handleBoxClick)
 
 
 function startGame() {
@@ -11,8 +13,15 @@ function startGame() {
     renderBox()
 }
 
+function handleBoxClick() {
+    if (event.target.dataset) {
+        score++
+        renderBox()
+    }
+}
 
 function renderBox() {
+    $game.innerHTML = ''
     let box = document.createElement('div')
 
     box.style.height = box.style.width = '50px'
@@ -21,6 +30,7 @@ function renderBox() {
     box.style.top = '50px'
     box.style.left = '70px'
     box.style.cursor = 'pointer'
+    box.setAttribute('data-box', true)
 
     $game.insertAdjacentElement("afterbegin", box)
 }
